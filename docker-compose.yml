@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: de_user
+      POSTGRES_PASSWORD: de_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow-standalone:
+    image: apache/airflow:2.8.1-python3.10
+    container_name: airflow_app
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__WEBSERVER__SECRET_KEY=secret
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./etl_pipeline.py:/opt/airflow/etl_pipeline.py
+    ports:
+      - "8080:8080"
+    command: standalone
+
+volumes:
+  postgres_data:
