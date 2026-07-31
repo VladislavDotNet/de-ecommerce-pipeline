@@ -44,5 +44,5 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone [https://github.com/Vladislav_DE/de-ecommerce-pipeline.git](https://github.com/YOUR_USERNAME/de-ecommerce-pipeline.git)
+git clone [https://github.com/VladislavDotNet/de-ecommerce-pipeline.git](https://github.com/YOUR_USERNAME/de-ecommerce-pipeline.git)
 cd de-ecommerce-pipeline
